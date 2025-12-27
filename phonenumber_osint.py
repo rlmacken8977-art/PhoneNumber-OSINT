@@ -169,8 +169,8 @@ def loop():
          
          # Basic information
          region = geocoder.description_for_number(parse, 'en')
-         tiimezone = timezone.time_zones_for_number(parse)
-         varrier = carrier.name_for_number(parse, 'en')
+         phone_timezone = timezone.time_zones_for_number(parse)
+         carrier_info = carrier.name_for_number(parse, 'en')
          ValidNumber = phonenumbers.is_valid_number(parse)
          PossibleNumber = phonenumbers.is_possible_number(parse)
          
@@ -198,8 +198,8 @@ def loop():
          print(Fore.CYAN + f"  Country Code: +{parse.country_code}")
          print(Fore.CYAN + f"  National Number: {parse.national_number}")
          print(Fore.CYAN + f"  Region/Location: {region}")
-         print(Fore.CYAN + f"  Time Zone(s): {', '.join(tiimezone) if tiimezone else 'Not available'}")
-         print(Fore.CYAN + f"  Carrier/ISP: {varrier if varrier else 'Not available'}")
+         print(Fore.CYAN + f"  Time Zone(s): {', '.join(phone_timezone) if phone_timezone else 'Not available'}")
+         print(Fore.CYAN + f"  Carrier/ISP: {carrier_info if carrier_info else 'Not available'}")
          print(Fore.CYAN + f"  Number Type: {number_type_str}")
          print(Fore.CYAN + f"  Is Valid: {'Yes' if ValidNumber else 'No'}")
          print(Fore.CYAN + f"  Is Possible: {'Yes' if PossibleNumber else 'No'}")
@@ -260,7 +260,7 @@ def loop():
 
 
            REDIRECTING TO MY WHATSAPP GROUP""")
-        t. sleep(3)
+        t.sleep(3)
         os.system ("https://chat.whatsapp.com/FqM6BfHV2AAL8K7rOUCpbW")
     elif option == 8:
         print(Fore.YELLOW + " Thanks for using\nFollow me on GitHub")
