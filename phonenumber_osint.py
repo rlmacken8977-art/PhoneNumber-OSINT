@@ -2,7 +2,7 @@ import os, time as t
 os.system("clear")
 try:
     import colorama
-    import phonenumbers 1-574-514-0672
+    import phonenumbers
 except ModuleNotFoundError:
     print("\033[1;31;40m Some requirements are missing!\n\nRun \"pip install -r requirements.txt\" then run \"python3 phonenumber_osint.py \"\033[1;37;40m" )
     t.sleep(2)
@@ -32,13 +32,14 @@ def loop():
     print(Fore.YELLOW + "[+] " + Fore.GREEN + "Tool Name:PhoneNumber OSINT\n" + Fore.YELLOW + "[+] " + Fore.GREEN + "Author:Spider Anongreyhat(Anonspidey)\n" + Fore.YELLOW + "[+] " + Fore.GREEN + "Version:1.6\n" + Fore.YELLOW + "[+] " + Fore.GREEN + "Team:TermuxHackz Society\n" + Fore.YELLOW + "[+] " + Fore.GREEN + "Github:https://github.com/spider863644\n" + Fore.YELLOW + "[+] " + Fore.GREEN + "WhatsApp:+2349052863644")
     print(Fore.RED + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>" + Fore.CYAN + "Choose a valid option" + Fore.RED + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     print(Fore.BLUE + """
-[1] Get basic information about  Phone Number 1-574-514-0672
-[2] Get Phone Number ISP 1-574-514-0672
-[3] Extract Phone Numbers and Save 1-574-514-0672
-[4] PhoneNumber Validator 1-574-514-0672
-[5] Update Program 
-[6] Join Our WhatsApp Group
-[7] Exit Program
+[1] Get basic information about Phone Number
+[2] Get Phone Number ISP
+[3] Extract Phone Numbers and Save
+[4] PhoneNumber Validator
+[5] Comprehensive Phone Number Lookup (with social media guidance)
+[6] Update Program 
+[7] Join Our WhatsApp Group
+[8] Exit Program
 """)
     try:
         option = int(input (Fore.YELLOW + Back. RED + "Choose a valid option " + Style.RESET_ALL))
@@ -154,6 +155,92 @@ def loop():
          else:
              print(Fore.GREEN + PhoneNumber + " is " + Fore.RED + "not valid")
     elif option == 5:
+         PhoneNumber = input(Fore.GREEN + "Enter phone number with country code: " + Style.RESET_ALL)
+         try:
+             parse = phonenumbers.parse(PhoneNumber)
+         except:
+             print(Fore.RED + "Add country code!")
+             t.sleep(3)
+             loop()
+         os.system("clear")
+         print(Fore.YELLOW + "=" * 70)
+         print(Fore.CYAN + f"Comprehensive Phone Number Lookup: {PhoneNumber}".center(70))
+         print(Fore.YELLOW + "=" * 70 + "\n")
+         
+         # Basic information
+         region = geocoder.description_for_number(parse, 'en')
+         phone_timezone = timezone.time_zones_for_number(parse)
+         carrier_info = carrier.name_for_number(parse, 'en')
+         ValidNumber = phonenumbers.is_valid_number(parse)
+         PossibleNumber = phonenumbers.is_possible_number(parse)
+         
+         # Number type
+         number_type = phonenumbers.number_type(parse)
+         type_names = {
+             0: "FIXED_LINE",
+             1: "MOBILE",
+             2: "FIXED_LINE_OR_MOBILE",
+             3: "TOLL_FREE",
+             4: "PREMIUM_RATE",
+             5: "SHARED_COST",
+             6: "VOIP",
+             7: "PERSONAL_NUMBER",
+             8: "PAGER",
+             9: "UAN",
+             10: "VOICEMAIL",
+             99: "UNKNOWN"
+         }
+         number_type_str = type_names.get(number_type, "UNKNOWN")
+         
+         # Display information
+         print(Fore.GREEN + "Basic Information:")
+         print(Fore.CYAN + f"  Parsed Number: {parse}")
+         print(Fore.CYAN + f"  Country Code: +{parse.country_code}")
+         print(Fore.CYAN + f"  National Number: {parse.national_number}")
+         print(Fore.CYAN + f"  Region/Location: {region}")
+         print(Fore.CYAN + f"  Time Zone(s): {', '.join(phone_timezone) if phone_timezone else 'Not available'}")
+         print(Fore.CYAN + f"  Carrier/ISP: {carrier_info if carrier_info else 'Not available'}")
+         print(Fore.CYAN + f"  Number Type: {number_type_str}")
+         print(Fore.CYAN + f"  Is Valid: {'Yes' if ValidNumber else 'No'}")
+         print(Fore.CYAN + f"  Is Possible: {'Yes' if PossibleNumber else 'No'}")
+         
+         print("\n" + Fore.YELLOW + "=" * 70)
+         print(Fore.RED + "Social Media Account Lookup Guidance".center(70))
+         print(Fore.YELLOW + "=" * 70 + "\n")
+         
+         print(Fore.MAGENTA + "Note: " + Fore.WHITE + "The phonenumbers library only provides geographic")
+         print(Fore.WHITE + "and carrier data. It does NOT provide personal identity or")
+         print(Fore.WHITE + "social media information.\n")
+         
+         print(Fore.GREEN + "To find social media accounts, try these methods:\n")
+         print(Fore.CYAN + "1. Manual Search on Social Media:")
+         print(Fore.WHITE + "   - Facebook: Search bar or 'Find Friends by Phone'")
+         print(Fore.WHITE + "   - WhatsApp: Add to contacts, check profile")
+         print(Fore.WHITE + "   - Telegram: Search by phone number")
+         print(Fore.WHITE + "   - LinkedIn: 'Connect' feature")
+         print(Fore.WHITE + "   - Snapchat: 'Add by Phone Number'\n")
+         
+         print(Fore.CYAN + "2. Reverse Phone Lookup Services:")
+         print(Fore.WHITE + "   - TrueCaller (app/website)")
+         print(Fore.WHITE + "   - WhitePages, Spokeo, BeenVerified")
+         print(Fore.WHITE + "   - Note: May require payment\n")
+         
+         print(Fore.CYAN + "3. Search Engines:")
+         print(Fore.WHITE + f"   - Google: Search \"{PhoneNumber}\"")
+         print(Fore.WHITE + "   - Check for public listings or mentions\n")
+         
+         print(Fore.CYAN + "4. OSINT Tools:")
+         print(Fore.WHITE + "   - PhoneInfoga (advanced phone OSINT)")
+         print(Fore.WHITE + "   - Maltego (commercial platform)\n")
+         
+         print(Fore.YELLOW + "=" * 70)
+         print(Fore.RED + "⚠ Privacy & Legal Notice ⚠".center(70))
+         print(Fore.YELLOW + "=" * 70)
+         print(Fore.WHITE + "Respect privacy laws. Use for legitimate purposes only.")
+         print(Fore.WHITE + "This tool is for educational purposes only.")
+         print(Fore.YELLOW + "=" * 70 + "\n")
+         
+    elif option == 6:
          os.system("clear")
          print(Fore.GREEN + "UPDATING...")
          t.sleep(2)
@@ -168,14 +255,14 @@ def loop():
          python3 phonenumber_osint.py
          """)
          exit()
-    elif option == 6:
+    elif option == 7:
         print(Fore.GREEN + """
 
 
            REDIRECTING TO MY WHATSAPP GROUP""")
-        t. sleep(3)
+        t.sleep(3)
         os.system ("https://chat.whatsapp.com/FqM6BfHV2AAL8K7rOUCpbW")
-    elif option == 7:
+    elif option == 8:
         print(Fore.YELLOW + " Thanks for using\nFollow me on GitHub")
         os.system("https://github.com/spider863644")
         exit()
